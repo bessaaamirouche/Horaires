@@ -4,7 +4,8 @@ export interface Prayer {
     dhuhr: string;
     asr: string;
     maghrib: string;
-    isha: string;
+  isha: string;
+  prochainePriere: string
    
 }
 
