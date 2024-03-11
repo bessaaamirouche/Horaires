@@ -1,54 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PrayerService } from './prayerService.service';
 import { Prayer, PrayerDetails } from './prayer.interface';
+import { TempsActuelComponent } from './time.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-salat-prayer-times',
   templateUrl: './salat-prayer-times.component.html',
   styleUrls: ['./salat-prayer-times.component.scss'],
-  standalone: true
+  standalone: true,
+  imports:[TempsActuelComponent,RouterOutlet]
 })
 export class SalatPrayerTimesComponent implements OnInit {
-  prayersData!: Prayer 
-
-  prayerTimes!: PrayerDetails
-  heureActuelleEnSecondes!: number;
-  heureActuelleFormattee!: string;
- 
+  prayersData!: Prayer;
+  prayerTimes!: PrayerDetails;
 
 
 
-  constructor(private prayerService: PrayerService) {}
+  constructor(private prayerService: PrayerService, private cdr: ChangeDetectorRef,) {}
 
   ngOnInit() {
+      this.getPrayerData();
+  }
+  
+
+  getPrayerData() {
+
     this.prayerService.getPrayerTime().subscribe(
       data => {
         this.prayersData = data;
-        
-    
-    }
+        this.cdr.detectChanges();
+        console.log(data);
+      },
+     
     );
-    
+
     this.prayerService.getActualTime().subscribe(
-      data => this.prayerTimes = data)
-      
-      
-
-   
+      data => {
+        this.prayerTimes = data;
+        this.cdr.detectChanges();
+        console.log(data);
+      },
+     
+    );
   }
-  
-  
-//actualiserHeureActuelle() {
-   // this.heureActuelleEnSecondes = Math.floor(new Date().getTime() / 1000);
-  //  this.heureActuelleFormattee = this.formaterHeureActuelle();
- // }
-
- // formaterHeureActuelle(): string {
- //   const maintenant = new Date();
-  //  const heures = maintenant.getHours().toString().padStart(2, '0');
-  //  const minutes = maintenant.getMinutes().toString().padStart(2, '0');
-  //  const secondes = maintenant.getSeconds().toString().padStart(2, '0');
- //   return `${heures}:${minutes}:${secondes}`;
 }
-
-

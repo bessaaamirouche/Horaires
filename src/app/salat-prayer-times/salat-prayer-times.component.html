@@ -1,9 +1,14 @@
 <div class="container-fluid pb-5 ">
-    <p class="text-info mx-2 text-center fs-3">HORAIRES DE PRIÈRES </p>
+    <p class="mx-2 text-center fs-2 slogan"> إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا
+        مَّوْقُوتًا</p>
+
+    @defer () { <app-temps-actuel class="text-center text-white fs-1"></app-temps-actuel>}
+
+
 
     @if (prayerTimes){
-    <div class="text-center text-white"> {{prayerTimes.dateGregorienne}} </div>
-    <div class="text-center text-white">({{prayerTimes.dateHijri}}) </div>
+    <div class="text-center text-white fs-4"> {{prayerTimes.dateGregorienne}} </div>
+    <div class="text-center text-white fs-4">({{prayerTimes.dateHijri}}) </div>
     <div class="text-center text-white fs-4"> {{prayerTimes.moisHijri}} </div>
     }
 
@@ -11,25 +16,31 @@
 
 
     <div class="container  d-flex align-items-center justify-content-center">
-        <div>
+        <div class="">
             @if (prayersData){
-            <div class="card my-2  d-flex align-items-center justify-content-center"> Fajr : {{prayersData.fajr}}
+            <div class="card my-2  d-flex align-items-center justify-content-center"> Fajr :
+                {{prayersData.fajr}}
             </div>
             <div class="card d-flex align-items-center justify-content-center my-2"> Chourouk :
                 {{prayersData.sunrise}}
             </div>
-            <div class="card d-flex align-items-center justify-content-center my-2"> Dhuhr : {{prayersData.dhuhr}}
+            <div class="card d-flex align-items-center justify-content-center my-2"> Dhuhr :
+                {{prayersData.dhuhr}}
             </div>
-            <div class="card d-flex align-items-center justify-content-center my-2"> Asr : {{prayersData.asr}} </div>
+            <div class="card d-flex align-items-center justify-content-center my-2"> Asr : {{prayersData.asr}}
+            </div>
             <div class="card d-flex align-items-center justify-content-center my-2"> Maghrib :
                 {{prayersData.maghrib}}
             </div>
             <div class="card d-flex align-items-center justify-content-center my-2"> Isha : {{prayersData.isha}}
             </div>
-            <div class="card d-flex align-items-center justify-content-center my-2 bg-info"> Prochaine Salat
-                : {{prayersData.prochainePriere}}
-            </div>
+            <br>
             }
+
+            <h4 class="next d-flex align-items-center justify-content-center my-2"> Prochaine Salat <br></h4>
+            <h2 class="next text-center">" {{prayersData.prochainePriere}} "</h2>
+
+
 
 
         </div>
